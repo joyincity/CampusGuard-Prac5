@@ -2,9 +2,12 @@
 
 #include <iostream>
 
-MedicalTeam::MedicalTeam(Radio* radio) : Unit(radio) {
+MedicalTeam::MedicalTeam(Radio* radio) {
+    this->radio = radio;
     this->deployable = false;
     this->isDispatched = false;
+
+    this->radio->addUnit(this);
 }
 
 void MedicalTeam::print() {
@@ -21,6 +24,7 @@ std::string MedicalTeam::getAlert() {
 
 void MedicalTeam::handleAlert(std::string alert) {
     this->deployable = true;
+    std::cout << "MedicalTeam received alert and is ready for deployment" << std::endl;
 }
 
 void MedicalTeam::cancelOperation() {

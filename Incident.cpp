@@ -4,15 +4,18 @@
 
 #include <iostream>
 
-Incident::Incident(Radio* radio, std::string type) : Unit(radio) {
+Incident::Incident(Radio* radio, std::string type) {
+    this->radio = radio;
     this->type = type;
     this->status = new Started(this);
+
+    this->radio->addUnit(this);
 }
 
 void Incident::print() {
     std::cout << "Incident Type: " << type;
     if (status){
-        std::cout << "\nStatus: " << status->getName();
+        std::cout << "\n\tStatus: " << status->getName();
     }
     std::cout <<  std::endl;
 }
@@ -46,6 +49,10 @@ void Incident::setStatus(Status* newStatus){
     }
     status = newStatus;
     std::cout << "Incident Status set to: " << status->getName() << std::endl;
+
+    if (status->getName() == "Reported") {
+        this->radio->notify(this);
+    }
 }
 
 Incident::~Incident(){

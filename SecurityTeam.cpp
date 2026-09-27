@@ -1,9 +1,12 @@
 #include "SecurityTeam.h"
 #include <iostream>
 
-SecurityTeam::SecurityTeam(Radio* radio) : Unit(radio) {
+SecurityTeam::SecurityTeam(Radio* radio) {
+    this->radio = radio;
     this->guardsDispatched = 0;
     this->deployable = false;
+
+    this->radio->addUnit(this);
 }
 
 void SecurityTeam::print() {

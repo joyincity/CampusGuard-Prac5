@@ -7,14 +7,15 @@
 #include <vector>
 
 class EmergencyChannel : public Radio{
-    std::vector<Unit*> unitList;
-
     public:
+        void addUnit(Unit* unit) override;
+
         void notify(Unit* unit) override;
         void dispatch();
         void cancel();
         void evacuate();
 
+        ~EmergencyChannel();
 };
 
 #endif
