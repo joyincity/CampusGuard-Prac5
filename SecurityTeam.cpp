@@ -24,6 +24,11 @@ void SecurityTeam::handleAlert(std::string alert) {
     }
 }
 
+void SecurityTeam::cancelOperation() {
+    this->guardsDispatched = 0;
+    this->deployable = false;
+}
+
 void SecurityTeam::dispatch() {
     if (!this->deployable) {
         return;
@@ -31,10 +36,4 @@ void SecurityTeam::dispatch() {
 
     std::cout << "Security team dispatched!" << std::endl;
     this->guardsDispatched++;
-}
-
-
-void SecurityTeam::cancelOperation() {
-    this->guardsDispatched = 0;
-    this->deployable = false;
 }
