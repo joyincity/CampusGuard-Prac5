@@ -1,7 +1,7 @@
 #ifndef RADIO_H
 #define RADIO_H
 
-#include "Unit.h"
+class Unit;
 
 class Radio{
     public:

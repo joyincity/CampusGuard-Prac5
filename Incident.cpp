@@ -17,8 +17,21 @@ void Incident::print() {
     std::cout <<  std::endl;
 }
 
+void Incident::statusChanged() {
+    std::cout << "Incident changed: " << status->getName() << std::endl;
+    this->radio->notify(this);
+}
+
 std::string Incident::getAlert() {
     return type;
+}
+
+void Incident::handleAlert(std::string alert) {
+    // TODO
+}
+
+void Incident::cancelOperation() {
+    setStatus(new Started(this));
 }
 
 void Incident::advanceStatus() {
@@ -32,6 +45,7 @@ void Incident::setStatus(Status* newStatus){
         delete status;
     }
     status = newStatus;
+    std::cout << "Incident Status set to: " << status->getName() << std::endl;
 }
 
 Incident::~Incident(){

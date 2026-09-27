@@ -3,10 +3,10 @@
 
 #include <string>
 
-class Radio;
+#include "Radio.h"
 
 class Unit {
-    private:
+    protected:
         Radio* radio;
     public:
         Unit(Radio* radio);
