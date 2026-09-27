@@ -1,12 +1,16 @@
-#ifndef EMERGENCYRESPONSEHANDLER_H
-#define EMERGENCYRESPONSEHANDLER_H
-#include "ResponseHandler.h"
+#ifndef EMERGENCYCHANNEL_H
+#define EMERGENCYCHANNEL_H
 
-class EmergencyResponseHandler : public ResponseHandler{
+#include "Radio.h"
+#include "Unit.h"
+
+class EmergencyChannel : public Radio{
     public:
+        void notify(Unit* unit) override;
         void dispatchUnit();
         void cancel();
         void evacuate();
 
 };
+
 #endif

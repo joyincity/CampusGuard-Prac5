@@ -1,7 +1,11 @@
-#ifndef RESPONSEHANDLER_H
-#define RESPONSEHANDLER_H
+#ifndef RADIO_H
+#define RADIO_H
 
-class ResponseHandler{
+#include "Unit.h"
 
+class Radio{
+    public:
+        virtual void notify(Unit* unit) = 0;
 };
+
 #endif
