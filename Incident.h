@@ -10,11 +10,13 @@ class Incident {
     Status* status;
     public:
     Incident(std::string type);
-    virtual ~Incident();
+    
     std::string getType() const;
     void print() const;
     void advanceStatus();
     void setStatus(Status* newStatus);
+
+    virtual ~Incident();
 };
 
 #endif

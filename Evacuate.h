@@ -1,14 +1,15 @@
 #ifndef EVACUATION_H
 #define EVACUATION_H
-#include "EmergencyResponseHandler.h"
+
+#include "EmergencyChannel.h"
 #include "OperationAction.h"
 
 class Evacuate: public OperationAction{
     private:
         int areaCode;
-        EmergencyResponseHandler * receiver;
+        EmergencyChannel * receiver;
     public:
-        Evacuate(EmergencyResponseHandler * receiver, int areaCode);  
+        Evacuate(EmergencyChannel * receiver, int areaCode);
         void execute()override;
 
 };

@@ -1,13 +1,13 @@
 #ifndef CANCELACTION_H
 #define CANCELACTION_H
-#include "EmergencyResponseHandler.h"
+#include "EmergencyChannel.h"
 #include "OperationAction.h"
 
 class CancelAction: public OperationAction{
     private:
-        EmergencyResponseHandler * receiver;
+        EmergencyChannel * receiver;
     public:
-        CancelAction(EmergencyResponseHandler * receiver);
+        CancelAction(EmergencyChannel * receiver);
         void execute()override;
 
 };
