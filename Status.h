@@ -7,11 +7,9 @@ class Incident;
 class Status {
     protected:
     Incident* incident;
-    private:
-    std::string name;
     public:
-    Status (std::string name, Incident* incident);
-    std::string getName() const;
+    Status (Incident* incident);
+    virtual std::string getName() = 0;
     virtual void nextState() = 0;
     virtual ~Status();
 };

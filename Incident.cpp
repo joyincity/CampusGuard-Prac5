@@ -1,23 +1,24 @@
 #include "Incident.h"
 #include "Status.h"
+#include "Started.h"
+
 #include <iostream>
 
-Incident::Incident(std::string type): type(type), status(nullptr) {}
-
-Incident::~Incident(){
-    delete status;
+Incident::Incident(Radio* radio, std::string type) : Unit(radio) {
+    this->type = type;
+    this->status = new Started(this);
 }
 
-std::string Incident::getType() const {
-    return type;
-}
-
-void Incident::print() const{
+void Incident::print() {
     std::cout << "Incident Type: " << type;
     if (status){
         std::cout << "\nStatus: " << status->getName();
     }
     std::cout <<  std::endl;
+}
+
+std::string Incident::getAlert() {
+    return type;
 }
 
 void Incident::advanceStatus() {
@@ -31,4 +32,8 @@ void Incident::setStatus(Status* newStatus){
         delete status;
     }
     status = newStatus;
+}
+
+Incident::~Incident(){
+    delete status;
 }

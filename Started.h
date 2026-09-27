@@ -6,6 +6,7 @@
 class Started : public Status {
     public:
     Started(Incident* incident);
+    std::string getName() override;
     void nextState() override;
 };
 

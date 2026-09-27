@@ -4,10 +4,14 @@
 #include "Radio.h"
 #include "Unit.h"
 
+#include <vector>
+
 class EmergencyChannel : public Radio{
+    std::vector<Unit*> unitList;
+
     public:
         void notify(Unit* unit) override;
-        void dispatchUnit();
+        void dispatch();
         void cancel();
         void evacuate();
 

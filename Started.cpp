@@ -1,9 +1,13 @@
 #include "Started.h"
-#include "Resolved.h"
+#include "Reported.h"
 #include "Incident.h"
 
-Started::Started(Incident* incident): Status("Started", incident){}
+Started::Started(Incident* incident) : Status(incident){}
+
+std::string Started::getName() {
+    return "Started";
+}
 
 void Started::nextState(){
-    incident->setStatus(new Resolved(incident));
+    incident->setStatus(new Reported(incident));
 }

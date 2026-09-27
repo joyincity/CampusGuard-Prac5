@@ -4,11 +4,21 @@
 #include "Unit.h"
 
 class SecurityTeam : public Unit {
+private:
+    int guardsDispatched;
+    bool deployable;
+
 public:
-    SecurityTeam(Radio* handler);
-    void statusChange() override;
-    void setStatus() override;
+    SecurityTeam(Radio* radio);
+
+    void print() override;
+    void statusChanged() override;
+    std::string getAlert() override;
+    void handleAlert(std::string alert) override;
+    void cancelOperation() override;
     void dispatch() override;
+
+    ~SecurityTeam() = default;
 };
 
 #endif

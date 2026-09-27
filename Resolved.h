@@ -6,6 +6,7 @@
 class Resolved : public Status{
     public:
     Resolved(Incident* incident);
+    std::string getName() override;
     void nextState() override;
 };
 

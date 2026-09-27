@@ -6,6 +6,7 @@
 class Reported: public Status {
     public:
     Reported(Incident* incident);
+    std::string getName() override;
     void nextState() override;
 };
 

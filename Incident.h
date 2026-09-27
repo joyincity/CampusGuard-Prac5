@@ -1,18 +1,24 @@
 #ifndef INCIDENT_H
 #define INCIDENT_H
 
+#include "Unit.h"
+
 #include <string>
 class Status;
 
-class Incident {
+class Incident : public Unit {
     private:
     std::string type;
     Status* status;
     public:
-    Incident(std::string type);
+    Incident(Radio* radio, std::string type);
+
+    void print() override;
+    void statusChanged() override;
+    std::string getAlert() override;
+    void handleAlert(std::string alert) override;
+    void cancelOperation() override;
     
-    std::string getType() const;
-    void print() const;
     void advanceStatus();
     void setStatus(Status* newStatus);
 
