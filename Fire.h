@@ -5,7 +5,7 @@
 
 class Fire : public Incident{
     public:
-    Fire(Radio* radio);
+    Fire(Radio* radio,int incidentID, int areaCode);
 };
 
 #endif

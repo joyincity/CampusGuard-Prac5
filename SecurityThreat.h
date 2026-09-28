@@ -5,7 +5,7 @@
 
 class SecurityThreat : public Incident {
     public:
-    SecurityThreat(Radio* radio);
+    SecurityThreat(Radio* radio,int incidentID, int areaCode);
 };
 
 #endif

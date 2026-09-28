@@ -25,6 +25,14 @@ void SecurityTeam::handleAlert(std::string alert) {
     if (alert == "SecurityThreat") {
         this->deployable = true;
     }
+    if(alert.rfind("EvacuateArea",0)==0){
+        std::cout << "SecurityTeam is ready to evacuate area: " << alert.substr(13) << std::endl;
+        this->deployable = true;;
+
+    }else if(alert.rfind("Cancel Evacuation",0)==0){
+        std::cout << "SecurityTeam received cancel evacuation alert for area: " << alert.substr(21) << std::endl;
+        this->cancelOperation();
+    }
 }
 
 void SecurityTeam::cancelOperation() {
@@ -32,11 +40,11 @@ void SecurityTeam::cancelOperation() {
     this->deployable = false;
 }
 
-void SecurityTeam::dispatch() {
+void SecurityTeam::dispatch(int incidentID) {
     if (!this->deployable) {
         return;
     }
 
-    std::cout << "Security team dispatched!" << std::endl;
+    std::cout << "Security team dispatched to Incident " << incidentID << "!" << std::endl;
     this->guardsDispatched++;
 }

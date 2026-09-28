@@ -3,7 +3,7 @@
 
 #include "EmergencyChannel.h"
 #include "OperationAction.h"
-
+#include <iostream>
 class Evacuate: public OperationAction{
     private:
         int areaCode;
@@ -11,6 +11,8 @@ class Evacuate: public OperationAction{
     public:
         Evacuate(EmergencyChannel * receiver, int areaCode);
         void execute()override;
+        void undo()override;
+        void ActionDescription()const override;
 
 };
 #endif
