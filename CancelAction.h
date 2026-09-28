@@ -5,10 +5,13 @@
 
 class CancelAction: public OperationAction{
     private:
-        EmergencyChannel * receiver;
+        
+        OperationAction* action;
     public:
-        CancelAction(EmergencyChannel * receiver);
+        CancelAction(OperationAction* action);
         void execute()override;
+        void undo()override;
+        void ActionDescription()const override;
 
 };
 #endif

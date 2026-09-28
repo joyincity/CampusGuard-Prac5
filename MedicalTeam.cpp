@@ -25,6 +25,13 @@ std::string MedicalTeam::getAlert() {
 void MedicalTeam::handleAlert(std::string alert) {
     this->deployable = true;
     std::cout << "MedicalTeam received alert and is ready for deployment" << std::endl;
+    if(alert.rfind("EvacuateArea",0)==0){
+        std::cout << "MedicalTeam received evacuation alert for area: " << alert.substr(13) << std::endl;
+
+    }else if(alert.rfind("Cancel Evacuation",0)==0){
+        std::cout << "MedicalTeam received cancel evacuation alert for area: " << alert.substr(21) << std::endl;
+        this->cancelOperation();
+    }
 }
 
 void MedicalTeam::cancelOperation() {
@@ -32,10 +39,10 @@ void MedicalTeam::cancelOperation() {
     this->isDispatched = false;
 }
 
-void MedicalTeam::dispatch() {
+void MedicalTeam::dispatch(int incidentID) {
     if (this->deployable) {
         this->isDispatched = true;
 
-        std::cout << "MedicalTeam dispatched." << std::endl;
+        std::cout << "MedicalTeam dispatched to Incident "<<incidentID << std::endl;
     }
 }
