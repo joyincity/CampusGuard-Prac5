@@ -40,7 +40,7 @@ void CommunicationService::cancelOperation()
     this->fireDepartment->recallFireTruck();
 }
 
-void CommunicationService::dispatch()
+void CommunicationService::dispatch(int incidentID)
 {
     this->fireDepartment->dispatchFireTruck();
 }
