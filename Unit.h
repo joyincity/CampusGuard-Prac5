@@ -4,7 +4,7 @@
 #include <string>
 
 #include "Radio.h"
-
+enum class UnitType { Incident, Medical, Security, Facility };
 class Unit {
     protected:
         Radio* radio;
@@ -13,8 +13,11 @@ class Unit {
         virtual void statusChanged() = 0;
         virtual std::string getAlert() = 0; // My alert
         virtual void handleAlert(std::string alert) = 0; // Received alert
-        virtual void dispatch(int incidentID) = 0;
-        virtual void cancelOperation() = 0;
+        virtual void dispatch(int incidentID, int areaCode) = 0;
+        virtual void cancelOperation(int incidentID) = 0;
+        virtual int getAssignedArea(){return -1;}
+        virtual bool getIsAvailable(){return false;}
+        virtual UnitType getType(){return UnitType::Incident;};
         virtual ~Unit() = default;
 };
 

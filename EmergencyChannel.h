@@ -11,8 +11,8 @@ class EmergencyChannel : public Radio{
         void addUnit(Unit* unit) override;
 
         void notify(Unit* unit) override;
-        void dispatch(int incidentID);
-        void cancelDispatch();
+        void dispatch(int incidentID, int areaCode);
+        void cancelDispatch(int incidentID);
         void cancelEvacuation(int areaCode);
         void evacuate(int areaCode);
 
