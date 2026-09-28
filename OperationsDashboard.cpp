@@ -23,6 +23,9 @@ void OperationsDashboard::undoLast(){
     ActionLog.back()->undo();
     
 }
+OperationAction* OperationsDashboard::getLastCommand() const {
+    return ActionLog.empty() ? nullptr : ActionLog.back();
+}
 OperationsDashboard::~OperationsDashboard(){
 for (auto p : ActionLog) {
             delete p; 

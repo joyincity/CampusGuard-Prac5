@@ -20,8 +20,8 @@ public:
 	void statusChanged() override;
 	std::string getAlert() override;
 	void handleAlert(std::string alert) override;
-	void dispatch(int incidentID) override;
-	void cancelOperation() override;
+	void dispatch(int incidentID, int areaCode) override;
+	void cancelOperation(int incidentID) override;
 
 	ControlRestorePoint* createRestorePoint();
 

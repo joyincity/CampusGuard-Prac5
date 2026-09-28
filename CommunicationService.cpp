@@ -34,13 +34,16 @@ void CommunicationService::handleAlert(std::string alert)
     }
 }
 
-void CommunicationService::cancelOperation()
+void CommunicationService::cancelOperation(int incidentID)
 {
-    this->fireDepartment->setDeployable(false);
+    this->fireDepartment->setDeployable(true);
     this->fireDepartment->recallFireTruck();
 }
 
-void CommunicationService::dispatch(int incidentID)
+void CommunicationService::dispatch(int incidentID,int areaCode)
 {
     this->fireDepartment->dispatchFireTruck();
+}
+bool CommunicationService::getIsAvailable() {
+    return this->fireDepartment->getDeployable()&& !this->fireDepartment->getIsDispatched();
 }

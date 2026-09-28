@@ -15,8 +15,10 @@ class CommunicationService: public Unit {
         void statusChanged() override;
         std::string getAlert() override;
         void handleAlert(std::string alert) override;
-        void cancelOperation() override;
-        void dispatch(int incidentID) override;
+        void cancelOperation(int incidentID) override;
+        void dispatch(int incidentID, int areaCode) override;
+        bool getIsAvailable() override;
+        UnitType getType() override { return UnitType::Adapter; }
 };
 
 #endif

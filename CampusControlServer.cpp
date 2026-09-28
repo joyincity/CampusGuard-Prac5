@@ -33,11 +33,11 @@ void CampusControlServer::handleAlert(std::string alert) {
 	}
 }
 
-void CampusControlServer::dispatch(int incidentID) {
+void CampusControlServer::dispatch(int ,int) {
 
 }
 
-void CampusControlServer::cancelOperation() {
+void CampusControlServer::cancelOperation(int) {
     ControlRestorePoint* restorePoint = serverManager->getLatestRP();
     if (restorePoint != nullptr) {
         setRestorePoint(restorePoint);
@@ -72,5 +72,5 @@ void CampusControlServer::setBackupPower(bool value) {
 }
 
 CampusControlServer::~CampusControlServer() {
-	delete this->serverManager;
+	
 }

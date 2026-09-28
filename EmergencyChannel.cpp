@@ -47,6 +47,12 @@ void EmergencyChannel::dispatch(int incidentID, int areaCode) {
             break;
         }
     }
+    for (auto unit : unitList) {
+        if (unit->getType() == UnitType::Adapter && unit->getIsAvailable()) {
+            unit->dispatch(incidentID, areaCode);
+            break;
+        }
+    }
 }
 
 void EmergencyChannel::cancelDispatch(int incidentID) {

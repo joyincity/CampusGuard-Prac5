@@ -7,13 +7,14 @@
 class Status;
 
 class Incident : public Unit {
-    private:
+private:
     int incidentID;
     int areaCode;
     std::string type;
     Status* status;
-    public:
-    Incident(Radio* radio,int incidentID, int areaCode, std::string type);
+
+public:
+    Incident(Radio* radio,int incidentID,int areaCode,std::string type);
 
     void print() override;
     void statusChanged() override;

@@ -13,6 +13,7 @@ class OperationsDashboard{
         void setCommand(OperationAction * command);
         void executeCommand();
         void undoLast();
+        OperationAction* getLastCommand() const;
         ~OperationsDashboard();
         
 };
