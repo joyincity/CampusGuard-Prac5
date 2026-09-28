@@ -18,6 +18,7 @@ class CommunicationService: public Unit {
         void cancelOperation(int incidentID) override;
         void dispatch(int incidentID, int areaCode) override;
         bool getIsAvailable() override;
+        ~CommunicationService();
         
 };
 

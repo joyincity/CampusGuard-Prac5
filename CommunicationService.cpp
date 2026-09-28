@@ -47,3 +47,6 @@ void CommunicationService::dispatch(int incidentID,int areaCode)
 bool CommunicationService::getIsAvailable() {
     return this->fireDepartment->getDeployable()&& !this->fireDepartment->getIsDispatched();
 }
+CommunicationService::~CommunicationService() {
+    delete this->fireDepartment;
+}
