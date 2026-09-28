@@ -1,16 +1,17 @@
 #include "DispatchUnit.h"
 
-DispatchUnit::DispatchUnit(EmergencyChannel * receiver,int incidentId){
+DispatchUnit::DispatchUnit(EmergencyChannel * receiver,Incident* incident){
     
     this->receiver= receiver;
-    this->incidentID= incidentId;
+    this->incidentID= incident->getIncidentID();
+    this->areaCode = incident->getAreaCode();
 }
 void DispatchUnit::execute(){
-            receiver->dispatch(incidentID);
+            receiver->dispatch(incidentID,areaCode);
         }
  void DispatchUnit:: undo(){
     receiver->cancelDispatch(incidentID);
  }
 void DispatchUnit::ActionDescription()const{
-    std::cout<<"Dispatched unit to incident " << incidentID<<std::endl;
+    std::cout<<"Dispatched unit to incident: " << incidentID<<std::endl;
 }

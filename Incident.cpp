@@ -41,8 +41,8 @@ void Incident::handleAlert(std::string alert) {
     // TODO
 }
 
-void Incident::cancelOperation() {
-    setStatus(new Started(this));
+void Incident::cancelOperation(int) {
+   
 }
 
 void Incident::advanceStatus() {

@@ -21,8 +21,10 @@ class Incident : public Unit {
     int getIncidentID();
     int getAreaCode();
     void handleAlert(std::string alert) override;
-    void cancelOperation() override;
-    void dispatch(int incidentID) override {};
+    void cancelOperation(int incidentID) override;
+    void dispatch(int , int ) override {};
+    int getAssignedArea()override{return -1;}
+    bool getIsAvailable()override{return false;}
 
     void advanceStatus();
     void setStatus(Status* newStatus);

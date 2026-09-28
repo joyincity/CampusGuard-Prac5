@@ -1,8 +1,8 @@
 #include "Evacuate.h"
 
-Evacuate::Evacuate(EmergencyChannel * receiver, int areaCode){
+Evacuate::Evacuate(EmergencyChannel * receiver, Incident* incident){
         this->receiver = receiver;
-        this->areaCode = areaCode;
+        this->areaCode =incident->getAreaCode();
 }
     void Evacuate:: execute(){
         receiver->evacuate(areaCode);
