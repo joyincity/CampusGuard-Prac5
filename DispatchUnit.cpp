@@ -10,7 +10,7 @@ void DispatchUnit::execute(){
             receiver->dispatch(incidentID,areaCode);
         }
  void DispatchUnit:: undo(){
-    receiver->cancelDispatch(incidentID);
+    receiver->cancelDispatch();
  }
 void DispatchUnit::ActionDescription()const{
     std::cout<<"Dispatched unit to incident: " << incidentID<<std::endl;
