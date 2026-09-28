@@ -11,12 +11,12 @@ class CommunicationService: public Unit {
 
     public:
         CommunicationService(Radio* radio);
-        void print();
-        void statusChanged();
-        std::string getAlert();
-        void handleAlert(std::string alert);
-        void cancelOperation();
-        void dispatch();
+        void print() override;
+        void statusChanged() override;
+        std::string getAlert() override;
+        void handleAlert(std::string alert) override;
+        void cancelOperation() override;
+        void dispatch(int incidentID) override;
 };
 
 #endif
