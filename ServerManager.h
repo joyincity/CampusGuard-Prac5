@@ -14,8 +14,10 @@ public:
     void addRP(ControlRestorePoint* rp);
     
 	ControlRestorePoint* getLatestRP();
+	ControlRestorePoint* getOldestRP() const;
 
 	void removeLatestRP();
+	void removeOldestRP();
 
 	bool isEmpty();
 

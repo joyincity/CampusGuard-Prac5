@@ -21,14 +21,15 @@ void IncidentHandler:: resolveIncident(Incident* incident){
 
     std::cout << "Advancing incident to Resolved."<<std::endl;
     incident->advanceStatus();
+    std::cout << "Notifying colleagues of resolution"<<std::endl;
+    channel->notify(incident);
 
     std::cout << "Restoring campus state"<<std::endl;
     if (!serverManager->isEmpty()) {
-        campusControl->setRestorePoint(serverManager->getLatestRP());
-        serverManager->removeLatestRP();
-    }
-    std::cout << "Notifying colleagues of resolution"<<std::endl;
-    channel->notify(incident);
+    campusControl->setRestorePoint(serverManager->getOldestRP()); 
+    serverManager->removeLatestRP();
+}
+    
 }
 void IncidentHandler:: evacuateArea(Incident* incident){
     std::cout << "Evacuating area " << incident->getAreaCode() << std::endl;
