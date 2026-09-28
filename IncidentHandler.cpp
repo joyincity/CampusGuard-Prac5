@@ -7,7 +7,7 @@ IncidentHandler::IncidentHandler(EmergencyChannel* channel,CampusControlServer* 
 }
 void IncidentHandler:: reportIncident(Incident* incident){
     std::cout << "Reporting incident " << incident->getIncidentID()<<" "<<std::endl;
-    std::cout << "Snapshot of campus before incident"<<std::endl;
+    std::cout<<"Capturing state of Campus"<<std::endl;
     serverManager->addRP(campusControl->createRestorePoint());
     std::cout << "Advancing incident to Reported"<<std::endl;
     incident->advanceStatus();  

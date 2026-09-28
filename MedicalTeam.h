@@ -24,7 +24,7 @@ public:
     void dispatch(int incidentID, int areaCode) override;
     int getAssignedArea()override;
     bool getIsAvailable()override;
-    UnitType getType() override {return UnitType::Medical;}
+   
 
     ~MedicalTeam() = default;
 };

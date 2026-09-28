@@ -35,23 +35,8 @@ void EmergencyChannel::notify(Unit* unit) {
 void EmergencyChannel::dispatch(int incidentID, int areaCode) {
     for (auto unit : unitList) {
         if (!unit) continue;
-        if (unit->getType() == UnitType::Medical &&unit->getIsAvailable()) {
-            unit->dispatch(incidentID,areaCode);
-            break;
-        }
-    }
-    for (auto unit : unitList) {
-        if (!unit) continue;
-        if (unit->getType()==UnitType::Security &&unit->getIsAvailable()) {
-            unit->dispatch(incidentID, areaCode);
-            break;
-        }
-    }
-    for (auto unit : unitList) {
-        if (unit->getType() == UnitType::Adapter && unit->getIsAvailable()) {
-            unit->dispatch(incidentID, areaCode);
-            break;
-        }
+        if (!unit->getIsAvailable()) continue;
+        unit->dispatch(incidentID, areaCode);
     }
 }
 

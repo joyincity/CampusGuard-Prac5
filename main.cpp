@@ -32,6 +32,11 @@ void story1_fireInLibrary() {
 
     std::cout << "\nCampus state before incident:"<<std::endl;
     std::cout<<"\n";
+    campus->setGateAccess(true);
+    campus->setFacilities(true);   
+    campus->setBackupPower(false); 
+    
+    
     campus->print();
     handler.reportIncident(fire);
 
@@ -98,7 +103,12 @@ std::cout<<"\n";
 
     std::cout << "\nCampus state before incident:"<<std::endl;
     std::cout<<"\n";
+    campus->setGateAccess(true);
+    campus->setFacilities(true);   
+    campus->setBackupPower(false); 
     campus->print();
+
+    
 
     handler.reportIncident(threat);
 
