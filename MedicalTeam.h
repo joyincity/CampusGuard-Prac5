@@ -15,7 +15,7 @@ public:
     std::string getAlert() override;
     void handleAlert(std::string alert) override;
     void cancelOperation() override;
-    void dispatch() override;
+    void dispatch(int incidentID) override;
 
     ~MedicalTeam() = default;
 };

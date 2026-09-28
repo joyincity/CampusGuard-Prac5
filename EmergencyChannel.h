@@ -3,7 +3,7 @@
 
 #include "Radio.h"
 #include "Unit.h"
-
+#include <string>
 #include <vector>
 
 class EmergencyChannel : public Radio{
@@ -11,9 +11,10 @@ class EmergencyChannel : public Radio{
         void addUnit(Unit* unit) override;
 
         void notify(Unit* unit) override;
-        void dispatch();
-        void cancel();
-        void evacuate();
+        void dispatch(int incidentID);
+        void cancelDispatch();
+        void cancelEvacuation(int areaCode);
+        void evacuate(int areaCode);
 
         ~EmergencyChannel();
 };

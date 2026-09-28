@@ -3,15 +3,19 @@
 
 #include "EmergencyChannel.h"
 #include "OperationAction.h"
-#include "string"
+#include <string>
+#include <iostream>
 
 class DispatchUnit: public OperationAction{
     private:
-        std::string unitType;
+        int incidentID;
         EmergencyChannel * receiver;
+        
     public:
-        DispatchUnit(std::string unitType, EmergencyChannel * receiver);
+        DispatchUnit(EmergencyChannel * receiver,int incidentID);
         void execute()override;
+        void undo()override;
+        void ActionDescription()const override;
 
 };
 #endif

@@ -1,3 +1,4 @@
+
 #include "CampusControlServer.h"
 #include "ServerManager.h"
 
@@ -8,6 +9,7 @@
 #include <iostream>
 
 int main() {
+    
     std::cout << "== Fire Incident ==" << std::endl;
 
     EmergencyChannel* channel = new EmergencyChannel();
