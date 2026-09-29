@@ -1,17 +1,14 @@
 # CampusGuard-Prac5
 CampusGuard, an emergency-response coordination platform for a large university campus.
 
-# CampusGuard
-
 ## Running normally
-
 Build the application:
 
 ```bash
 make
 ```
 
-Run the application:
+Run:
 
 ```bash
 make run
@@ -24,14 +21,13 @@ make clean
 ```
 
 ## Running with Docker
-
-Build and run the application using Docker Compose:
+Build and run:
 
 ```bash
 docker compose up --build
 ```
 
-To stop the application:
+Stop:
 
 ```bash
 docker compose down
@@ -39,13 +35,13 @@ docker compose down
 
 ## Docker Build
 
-To build the Docker image manually:
+To build manually:
 
 ```bash
 docker build -t campusguard .
 ```
 
-To run the Docker image:
+Run:
 
 ```bash
 docker run --rm campusguard
