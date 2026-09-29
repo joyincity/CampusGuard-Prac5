@@ -4,8 +4,10 @@
 
 #include <iostream>
 
-Incident::Incident(Radio* radio, std::string type) {
+Incident::Incident(Radio* radio,int incidentID,int areaCode, std::string type) {
     this->radio = radio;
+    this->incidentID = incidentID;
+    this->areaCode = areaCode;
     this->type = type;
     this->status = new Started(this);
 
@@ -28,13 +30,19 @@ void Incident::statusChanged() {
 std::string Incident::getAlert() {
     return type;
 }
+int Incident::getIncidentID(){
+    return incidentID;
+}
+int Incident::getAreaCode(){
+    return areaCode ;
+}
 
 void Incident::handleAlert(std::string alert) {
     // TODO
 }
 
-void Incident::cancelOperation() {
-    setStatus(new Started(this));
+void Incident::cancelOperation(int) {
+   
 }
 
 void Incident::advanceStatus() {

@@ -1,67 +1,148 @@
-#include "CampusControlServer.h"
-#include "ServerManager.h"
 
+#include "IncidentHandler.h"
 #include "Fire.h"
+#include "SecurityThreat.h"
 #include "EmergencyChannel.h"
 #include "MedicalTeam.h"
+#include "SecurityTeam.h"
+#include "CommunicationService.h"
+#include "CampusControlServer.h"
+#include "ServerManager.h"
+#include "OperationsDashboard.h"
+#include "CancelAction.h"
 
 #include <iostream>
 
-int main() {
-    std::cout << "== Fire Incident ==" << std::endl;
+// Patterns: Facade, Command, Mediator, Adapter, State, Memento scenario 1
 
-    EmergencyChannel* channel = new EmergencyChannel();
+void story1_fireInLibrary() {
+    std::cout << "Scenario 1: Fire in the Library"<<std::endl;
+    std::cout << "----------------------------------------------------"<<std::endl;
+    std::cout<<"\n";
 
-    Incident* incident = new Fire(channel);
-
-    Unit* medicalTeam = new MedicalTeam(channel);
-
-    incident->print();
-
-    incident->advanceStatus();
-
-    incident->print();
-
-    channel->dispatch();
-
-    incident->advanceStatus();
-
-    delete channel;
-    delete incident;
-    delete medicalTeam;
-
-    // Memento Testing
-    std::cout << "Memento for CampusControlServer" << std::endl;
-    CampusControlServer server;
+    EmergencyChannel*channel   = new EmergencyChannel();
     ServerManager manager;
+    CampusControlServer* campus    = new CampusControlServer(channel, &manager);
+    OperationsDashboard* dashboard = new OperationsDashboard();
+    IncidentHandler handler(channel, campus, &manager, dashboard);
+    Incident*fire = new Fire(channel, 1, 3);
+    Unit*medA  = new MedicalTeam(channel);
+    Unit*secA  = new SecurityTeam(channel);
+    Unit*comms = new CommunicationService(channel);
 
-    server.print();
+    std::cout << "\nCampus state before incident:"<<std::endl;
+    std::cout<<"\n";
+    campus->setGateAccess(true);
+    campus->setFacilities(true);   
+    campus->setBackupPower(false); 
+    
+    
+    campus->print();
+    handler.reportIncident(fire);
 
-    manager.addRP(server.createRestorePoint());
+    std::cout <<"\nFireDepartment state after dispatch:"<<std::endl;
+    std::cout<<"\n";
+    comms->print();
+    std::cout << "\nCancelling the false alarm"<<std::endl;
+    std::cout<<"\n";
+    OperationAction* target = dashboard->getLastCommand();
+    if (target != nullptr) {
+        dashboard->setCommand(new CancelAction(target));
+        dashboard->executeCommand();
+    }
 
-    server.setGateAccess(true);
-    server.print();
+    std::cout << "\nFireDepartment state after cancel:"<<std::endl;
+    std::cout<<"\n";
+    comms->print();
+    std::cout << "\nUndoing the cancel — the fire is real!"<<std::endl;
+    std::cout<<"\n";
+    OperationAction* cancelCmd = dashboard->getLastCommand();
+    if (cancelCmd != nullptr) {
+        cancelCmd->undo();
+    }
 
-    manager.addRP(server.createRestorePoint());
+    std::cout << "\nFireDepartment state after undo: "<<std::endl;
+    std::cout<<"\n";
+    comms->print();
 
-    server.setFacilities(true);
-    server.print();
+    handler.resolveIncident(fire);
 
-    manager.addRP(server.createRestorePoint());
+    std::cout << "\nCampus state after resolution:"<<std::endl;
+    std::cout<<"\n";
+    campus->print();
 
-    server.setBackupPower(true);
-    server.print();
+    delete comms;
+    delete medA;
+    delete secA;
+    delete fire;
+    delete dashboard;
+    delete campus;
+    delete channel;
+}
 
-    server.setRestorePoint(manager.getLatestRP());
-    server.print();
 
-    manager.removeLatestRP();
 
-    server.setRestorePoint(manager.getLatestRP());
-    server.print();
+//Patterns: Facade, Command, Mediator,Adapter, State,Memento
 
-    manager.removeLatestRP();
+void story2_securityThreat() {
+    
+    std::cout << "  scenario 2: Security Threat at the Piazza\n";
+    std::cout << "-------------------------------------------------"<<std::endl;
+std::cout<<"\n";
+    EmergencyChannel*channel   = new EmergencyChannel();
+    ServerManager manager;
+    CampusControlServer* campus = new CampusControlServer(channel, &manager);
+    OperationsDashboard* dashboard = new OperationsDashboard();
 
-    server.setRestorePoint(manager.getLatestRP());
-    server.print();
+    IncidentHandler handler(channel, campus, &manager, dashboard);
+
+    Incident* threat = new SecurityThreat(channel, 2, 7);
+    Unit* medB  = new MedicalTeam(channel);
+    Unit* secB  = new SecurityTeam(channel);
+    Unit* comms = new CommunicationService(channel); 
+
+    std::cout << "\nCampus state before incident:"<<std::endl;
+    std::cout<<"\n";
+    campus->setGateAccess(true);
+    campus->setFacilities(true);   
+    campus->setBackupPower(false); 
+    campus->print();
+
+    
+
+    handler.reportIncident(threat);
+
+    handler.evacuateArea(threat);
+
+    std::cout << "\nFireDepartment state during incident:"<<std::endl;
+    std::cout<<"\n";
+    comms->print();
+
+    std::cout << "\nCampus state during incident:"<<std::endl;
+    std::cout<<"\n";
+    campus->print();
+
+    handler.resolveIncident(threat);
+
+    std::cout << "\nCampus state after resolution:"<<std::endl;
+    std::cout<<"\n";
+    campus->print();
+
+    delete comms;
+    delete medB;
+    delete secB;
+    delete threat;
+    delete dashboard;
+    delete campus;
+    delete channel;
+}
+
+
+int main() {
+   
+
+    story1_fireInLibrary();
+    story2_securityThreat();
+
+    return 0;
 }

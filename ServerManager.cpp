@@ -14,11 +14,20 @@ ControlRestorePoint* ServerManager::getLatestRP() {
 
     return history.back();
 }
+ControlRestorePoint* ServerManager::getOldestRP() const {
+    return history.empty() ? nullptr : history.front();
+}
 
 void ServerManager::removeLatestRP() {
     if (!history.empty()) {
         delete history.back();
         history.pop_back();
+    }
+}
+void ServerManager::removeOldestRP() {
+    if (!history.empty()) {
+        delete history.front();
+        history.erase(history.begin());
     }
 }
 

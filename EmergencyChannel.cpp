@@ -32,22 +32,34 @@ void EmergencyChannel::notify(Unit* unit) {
     }
 }
 
-void EmergencyChannel::dispatch() {
+void EmergencyChannel::dispatch(int incidentID, int areaCode) {
     for (auto unit : unitList) {
         if (!unit) continue;
-        unit->dispatch();
+        if (!unit->getIsAvailable()) continue;
+        unit->dispatch(incidentID, areaCode);
     }
 }
 
-void EmergencyChannel::cancel() {
+void EmergencyChannel::cancelDispatch(int incidentID) {
     for (auto unit : unitList) {
         if (!unit) continue;
-        unit->cancelOperation();
+        unit->cancelOperation(incidentID);
     }
 }
 
-void EmergencyChannel::evacuate() {
-
+void EmergencyChannel::evacuate(int areaCode) {
+    for(auto unit: unitList){
+        if(!unit)continue;
+        if(unit->getAssignedArea()!= areaCode)continue;
+        unit->handleAlert("EvacuateArea:" + std::to_string(areaCode));
+    }
+}
+void EmergencyChannel::cancelEvacuation(int areaCode){
+    for(auto unit: unitList){
+        if(!unit)continue;
+        if(unit->getAssignedArea()!=areaCode)continue;
+        unit->handleAlert("Cancel Evacuation at:" + std::to_string(areaCode));
+    }
 }
 
 EmergencyChannel::~EmergencyChannel() {

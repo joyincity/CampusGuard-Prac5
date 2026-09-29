@@ -1,19 +1,27 @@
 #ifndef CAMPUSCONTROLSERVER_H
 #define CAMPUSCONTROLSERVER_H
 
+#include "Unit.h"
 #include "ControlRestorePoint.h"
+#include "ServerManager.h"
 
-class CampusControlServer {
+class CampusControlServer : public Unit {
 
 private:
 	bool gateAccess;
 	bool facilities;
 	bool backupPower;
+	ServerManager* serverManager;
 
 public:
-	CampusControlServer();
+	CampusControlServer(Radio* radio, ServerManager* serverManager);
 
-	void print();
+	void print() override;
+	void statusChanged() override;
+	std::string getAlert() override;
+	void handleAlert(std::string alert) override;
+	void dispatch(int incidentID, int areaCode) override;
+	void cancelOperation(int incidentID) override;
 
 	ControlRestorePoint* createRestorePoint();
 
@@ -25,7 +33,7 @@ public:
 
 	void setBackupPower(bool value);
 
-	~CampusControlServer() = default;
+	~CampusControlServer();
 };
 
 #endif
