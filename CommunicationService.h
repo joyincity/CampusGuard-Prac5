@@ -7,7 +7,6 @@
 class CommunicationService: public Unit {
     private:
         FireDepartment* fireDepartment;
-        Radio* radio;
 
     public:
         CommunicationService(Radio* radio);
